@@ -1,36 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 // import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { WeatherPage } from "./components/weather_page/WeatherPage.comp";
 import { FormInput } from "./components/weather_page/FormInput.comp";
 
-const Api_Key = "fc0fda9097721a9d859cf472cb500f44";
-
-const initialState = {
-  city: undefined,
-  country: undefined,
-  icon: undefined,
-  main: undefined,
-  celsius: undefined,
-  temp_max: null,
-  temp_min: null,
-  description: "",
-  error: false,
-};
+// const Api_Key = "fc0fda9097721a9d859cf472cb500f44";
 
 function App() {
-  const [weatherData, setWeatherData] = useState(initialState);
-
-  const weatherIcon = {
-    ThunderStorm: "wi-thunderstorm",
-    Drizzle: "wi-sleet",
-    Rain: "wi-storm-showers",
-    Snow: "wi-snow",
-    Atmosphere: "wi-fog",
-    Clear: "wi-day-sunny",
-    Clouds: "",
+  const initialState = {
+    city: undefined,
+    country: undefined,
+    icon: undefined,
+    main: undefined,
+    celsius: undefined,
+    temp_max: null,
+    temp_min: null,
+    description: "",
+    error: false,
   };
+  const [weatherData, setWeatherData] = useState(initialState);
 
   // function to convert kelvin to celsius
   const calCelsius = (temp) => {
@@ -39,36 +28,44 @@ function App() {
   };
 
   const getWeather = async (e) => {
-    const api_url = `http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${Api_Key}`;
-    axios.get(api_url).then((res) => {
-      let response = res.data;
-      console.log(response);
-      setWeatherData({
-        ...initialState,
-        city: response.name,
-        country: response.sys.country,
-        main: response.weather[0].main,
-        celsius: calCelsius(response.main.temp),
-        temp_max: calCelsius(response.main.temp_max),
-        temp_min: calCelsius(response.main.temp_min),
-        description: response.weather[0].description,
-      });
-    });
-  };
+    e.preventDefault();
 
-  useEffect(() => {
-    getWeather();
-  }, []);
+    let country = e.target.elements.country.value;
+    let city = e.target.elements.city.value;
+    const api_url = `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${process.env.Api_key}`;
+
+    const api_call = await axios.get(api_url);
+
+    const response = await api_call.data;
+
+    console.log(response);
+    setWeatherData({
+      ...initialState,
+      city: response.name,
+      country: response.sys.country,
+      main: response.weather[0].main,
+      celsius: calCelsius(response.main.temp),
+      temp_max: calCelsius(response.main.temp_max),
+      temp_min: calCelsius(response.main.temp_min),
+      description: response.weather[0].description,
+      icon: response.weather[0].icon,
+    });
+
+    // await getWeatherIcon(weatherIcon, response.weather[0].id);
+  };
 
   return (
     <div className="App">
-      <FormInput />
+      <FormInput getWeather={getWeather} />
+      {/* <FormInput /> */}
       <WeatherPage
-        cityName={weatherData.name}
+        cityName={weatherData.city}
         tempCelsius={weatherData.celsius}
         temp_max={weatherData.temp_max}
         temp_min={weatherData.temp_min}
         description={weatherData.description}
+        weatherIcon={weatherData.icon}
+        icon={weatherData.icon}
       />
     </div>
   );

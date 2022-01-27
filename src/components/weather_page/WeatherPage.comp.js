@@ -10,6 +10,7 @@ export const WeatherPage = ({
   temp_max,
   temp_min,
   description,
+  weatherIcon,
 }) => {
   return (
     <div className="weather-Page__container">
@@ -17,17 +18,20 @@ export const WeatherPage = ({
         <Row>
           <Col sm={12}>
             <h1 className="weather-page__city">{cityName}</h1>
+
             <h5 className="py-5">
-              <i className="wi wi-day-fog display-1"></i>
+              <img
+                src={`http://openweathermap.org/img/w/${weatherIcon}.png`}
+                alt=""
+              />
             </h5>
 
             {/* Get temperature */}
-            <h1 className="py-3">{tempCelsius}&deg;</h1>
+            {tempCelsius ? <h1 className="py-3">{tempCelsius}&deg;</h1> : null}
+
             {/* show min and max temp */}
 
-            <h1 className="py-3">
-              {temp_min}&deg;, {temp_max}&deg;
-            </h1>
+            {maxminTemp(temp_min, temp_max)}
             {/* weather desc */}
             <h4 className="py-3">{description}</h4>
           </Col>
@@ -35,4 +39,15 @@ export const WeatherPage = ({
       </Container>
     </div>
   );
+};
+
+const maxminTemp = (min, max) => {
+  if (max && min) {
+    return (
+      <h3>
+        <span className="px-4">{min}&deg;</span>
+        <span className="px-4">{max}&deg;</span>
+      </h3>
+    );
+  }
 };

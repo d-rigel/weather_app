@@ -68,3 +68,74 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+//trash codes
+{/\_ <h5 className="py-5">
+<i className={`wi ${weatherIcon} display-1`}></i>
+
+</h5> _/}
+
+//get weather icon by conditions
+const getWeatherIcon = (icons, rangeId) => {
+switch (true) {
+case rangeId >= 200 && rangeId <= 232:
+setWeatherData({
+...initialState,
+icon: icons.ThunderStorm,
+});
+break;
+case rangeId >= 300 && rangeId <= 321:
+setWeatherData({
+...initialState,
+icon: icons.Drizzle,
+});
+break;
+case rangeId >= 500 && rangeId <= 531:
+setWeatherData({
+...initialState,
+icon: icons.Rain,
+});
+break;
+case rangeId >= 600 && rangeId <= 622:
+setWeatherData({
+...initialState,
+icon: icons.Snow,
+});
+break;
+case rangeId >= 701 && rangeId <= 781:
+setWeatherData({
+...initialState,
+icon: icons.Atmosphere,
+});
+break;
+case rangeId === 800:
+setWeatherData({
+...initialState,
+icon: icons.Clear,
+});
+break;
+case rangeId >= 801 && rangeId <= 804:
+setWeatherData({
+...initialState,
+icon: icons.Clouds,
+});
+break;
+default:
+setWeatherData({
+...initialState,
+icon: icons.Clouds,
+});
+}
+};
+
+//
+//getting weather icons
+const weatherIcon = {
+ThunderStorm: "wi-thunderstorm",
+Drizzle: "wi-sleet",
+Rain: "wi-storm-showers",
+Snow: "wi-snow",
+Atmosphere: "wi-fog",
+Clear: "wi-day-sunny",
+Clouds: "wi-day-fog",
+};

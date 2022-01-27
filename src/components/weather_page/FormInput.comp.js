@@ -4,15 +4,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
 import "./formInput.css";
 
-export const FormInput = () => {
+export const FormInput = ({ getWeather }) => {
   return (
     <div className="formInput">
       <Container>
         <Row>
-          <Form className="d-flex">
+          <Form onSubmit={getWeather} className="d-flex">
             <Col sm={5}>
               <Form.Group className="mb-3">
                 <Form.Control type="text" name="city" placeholder="city" />
