@@ -19,7 +19,7 @@ export const WeatherPage = ({
           <Col sm={12}>
             <h1 className="weather-page__city">{cityName}</h1>
 
-            <h5 className="py-5">
+            <h5 className="py-3">
               <img
                 src={`http://openweathermap.org/img/w/${weatherIcon}.png`}
                 alt=""
@@ -27,7 +27,7 @@ export const WeatherPage = ({
             </h5>
 
             {/* Get temperature */}
-            {tempCelsius ? <h1 className="py-3">{tempCelsius}&deg;</h1> : null}
+            {tempCelsius ? <h1 className="py-2">{tempCelsius}&deg;</h1> : null}
 
             {/* show min and max temp */}
 

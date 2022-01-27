@@ -5,11 +5,15 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./formInput.css";
+import Alert from "react-bootstrap/Alert";
 
-export const FormInput = ({ getWeather }) => {
+export const FormInput = ({ getWeather, error }) => {
   return (
     <div className="formInput">
       <Container>
+        <Row>
+          <Col>{error ? errorMsg() : null}</Col>
+        </Row>
         <Row>
           <Form onSubmit={getWeather} className="d-flex">
             <Col sm={5}>
@@ -35,5 +39,13 @@ export const FormInput = ({ getWeather }) => {
         </Row>
       </Container>
     </div>
+  );
+};
+
+const errorMsg = () => {
+  return (
+    <Alert variant="danger">
+      <h4>Please enter city and country</h4>
+    </Alert>
   );
 };
