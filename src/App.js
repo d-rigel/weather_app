@@ -50,6 +50,7 @@ function App() {
         temp_min: calCelsius(response.main.temp_min),
         description: response.weather[0].description,
         icon: response.weather[0].icon,
+        loading: false,
       });
       e.target.elements.country.value = "";
       e.target.elements.city.value = "";
@@ -57,10 +58,18 @@ function App() {
       setWeatherData({
         ...initialState,
         error: true,
+        loading: false,
+      });
+    }
+    if (weatherData.loading === false) {
+      setWeatherData({
+        ...initialState,
+        loading: true,
       });
     }
 
     // await getWeatherIcon(weatherIcon, response.weather[0].id);
+    // loadSpinner();
   };
 
   return (
@@ -75,6 +84,7 @@ function App() {
         description={weatherData.description}
         weatherIcon={weatherData.icon}
         icon={weatherData.icon}
+        loading={weatherData.loading}
       />
     </div>
   );

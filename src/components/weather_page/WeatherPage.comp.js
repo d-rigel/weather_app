@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./weatherPage.css";
+import Spinner from "react-bootstrap/Spinner";
 
 export const WeatherPage = ({
   cityName,
@@ -11,31 +12,37 @@ export const WeatherPage = ({
   temp_min,
   description,
   weatherIcon,
+  loading,
 }) => {
   return (
     <div className="weather-Page__container">
       <Container>
-        <Row>
-          <Col sm={12}>
-            <h1 className="weather-page__city">{cityName}</h1>
+        {loading ? (
+          showSpinner()
+        ) : (
+          <Row>
+            <Col sm={12}>
+              <h1 className="weather-page__city">{cityName}</h1>
+              <h5 className="py-3">
+                <img
+                  src={`http://openweathermap.org/img/w/${weatherIcon}.png`}
+                  alt=""
+                />
+              </h5>
 
-            <h5 className="py-3">
-              <img
-                src={`http://openweathermap.org/img/w/${weatherIcon}.png`}
-                alt=""
-              />
-            </h5>
+              {/* Get temperature */}
+              {tempCelsius ? (
+                <h1 className="py-2">{tempCelsius}&deg;</h1>
+              ) : null}
 
-            {/* Get temperature */}
-            {tempCelsius ? <h1 className="py-2">{tempCelsius}&deg;</h1> : null}
+              {/* show min and max temp */}
 
-            {/* show min and max temp */}
-
-            {maxminTemp(temp_min, temp_max)}
-            {/* weather desc */}
-            <h4 className="py-3">{description}</h4>
-          </Col>
-        </Row>
+              {maxminTemp(temp_min, temp_max)}
+              {/* weather desc */}
+              <h4 className="py-3">{description}</h4>
+            </Col>
+          </Row>
+        )}
       </Container>
     </div>
   );
@@ -50,4 +57,8 @@ const maxminTemp = (min, max) => {
       </h3>
     );
   }
+};
+
+const showSpinner = () => {
+  return <Spinner variant="info" animation="border"></Spinner>;
 };

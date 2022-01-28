@@ -18,7 +18,12 @@ export const FormInput = ({ getWeather, error }) => {
           <Form onSubmit={getWeather} className="d-flex">
             <Col sm={5}>
               <Form.Group className="mb-3">
-                <Form.Control type="text" name="city" placeholder="city" />
+                <Form.Control
+                  type="text"
+                  name="city"
+                  placeholder="city"
+                  autoComplete="off"
+                />
               </Form.Group>
             </Col>
             <Col sm={5}>
@@ -27,6 +32,7 @@ export const FormInput = ({ getWeather, error }) => {
                   type="text"
                   name="country"
                   placeholder="country"
+                  autoComplete="off"
                 />
               </Form.Group>
             </Col>
