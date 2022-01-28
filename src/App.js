@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
-// import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { WeatherPage } from "./components/weather_page/WeatherPage.comp";
 import { FormInput } from "./components/weather_page/FormInput.comp";
-
-// const Api_Key = "fc0fda9097721a9d859cf472cb500f44";
 
 function App() {
   const initialState = {
@@ -67,15 +64,11 @@ function App() {
         loading: true,
       });
     }
-
-    // await getWeatherIcon(weatherIcon, response.weather[0].id);
-    // loadSpinner();
   };
 
   return (
     <div className="App">
       <FormInput getWeather={getWeather} error={weatherData.error} />
-      {/* <FormInput /> */}
       <WeatherPage
         cityName={weatherData.city}
         tempCelsius={weatherData.celsius}
