@@ -58,12 +58,6 @@ function App() {
         loading: false,
       });
     }
-    if (weatherData.loading === false) {
-      setWeatherData({
-        ...initialState,
-        loading: true,
-      });
-    }
   };
 
   return (
@@ -77,7 +71,6 @@ function App() {
         description={weatherData.description}
         weatherIcon={weatherData.icon}
         icon={weatherData.icon}
-        loading={weatherData.loading}
       />
     </div>
   );

@@ -37,7 +37,11 @@ export const FormInput = ({ getWeather, error }) => {
               </Form.Group>
             </Col>
             <Col sm={2}>
-              <Button variant="primary" type="submit" className="px-5 py-2 ">
+              <Button
+                variant="secondary"
+                size="sm"
+                type="submit"
+                className="custom-btn ">
                 Get Weather
               </Button>
             </Col>
