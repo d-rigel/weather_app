@@ -15,7 +15,7 @@ function App() {
     temp_min: null,
     description: "",
     error: false,
-    loading: false,
+    date: undefined,
   };
   const [weatherData, setWeatherData] = useState(initialState);
 
@@ -36,6 +36,19 @@ function App() {
       const api_url = `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${process.env.REACT_APP_API_KEY}`;
       const api_call = await axios.get(api_url);
       const response = await api_call.data;
+      // console.log(response.dt);
+      let days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let d = new Date(response.dt * 1000);
+
+      const dayName = days[d.getDay()];
       console.log(response);
       setWeatherData({
         ...initialState,
@@ -48,6 +61,7 @@ function App() {
         description: response.weather[0].description,
         icon: response.weather[0].icon,
         loading: false,
+        day: dayName,
       });
       e.target.elements.country.value = "";
       e.target.elements.city.value = "";
@@ -71,6 +85,7 @@ function App() {
         description={weatherData.description}
         weatherIcon={weatherData.icon}
         icon={weatherData.icon}
+        dayName={weatherData.day}
       />
     </div>
   );

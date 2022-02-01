@@ -11,6 +11,7 @@ export const WeatherPage = ({
   temp_min,
   description,
   weatherIcon,
+  dayName,
 }) => {
   return (
     <div className="weather-Page__container">
@@ -18,6 +19,7 @@ export const WeatherPage = ({
         <Row>
           <Col sm={12}>
             <h1 className="weather-page__city">{cityName}</h1>
+            <h5 className="weather-page__city">{dayName}</h5>
             <h5 className="py-3">
               <img
                 src={`http://openweathermap.org/img/w/${weatherIcon}.png`}
